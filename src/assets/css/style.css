@@ -1,0 +1,42 @@
+@font-face {
+  font-family: "BalooThambi";
+  src: url("../fonts/BalooThambi2-Regular.ttf");
+}
+@font-face {
+  font-family: "BalooThambiExtraBold";
+  src: url("../fonts/BalooThambi2-ExtraBold.ttf");
+}
+@font-face {
+  font-family: "BalooThambiBold";
+  src: url("../fonts/BalooThambi2-Bold.ttf");
+}
+html {
+  scroll-behavior: smooth;
+}
+
+*{
+  scroll-behavior: smooth;
+  font-family:BalooThambi !important;
+}
+
+.bbg{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.842) !important;
+}
+
+.first {
+  background-image: url("../images/home_background.jpg"); /* The image used */
+  background-color: rgba(0, 0, 0, 0.603); /* Used if the image is unavailable */
+  /* height: 500px;  You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  height: 100vh;
+  background-color:'white';
+}
+
+
+.cursorPointer{
+  cursor:pointer;
+}
