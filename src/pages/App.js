@@ -6,18 +6,24 @@ import {
   ZIPCODE_OPTIONS,
   CUSTOMER_AGE_OPTIONS,
   PRODUCT_NAME_OPTIONS,
-  RENTAL_TENURE_OPTIONS
+  RENTAL_TENURE_OPTIONS,
+  COLORS
 } from "../utils/constants";
 import Select from 'react-select';
-import { Slider } from '@material-ui/core';
 
-
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      backgroundcolor: "transparent",
+      backgroundcolor: COLORS.TRANSPARENT,
       selectedMonthlyRentalAmountOption: null,
       selectedZipcodeOption: null,
       selectedAgeOption: null,
@@ -28,79 +34,48 @@ export default class App extends React.Component {
     this.landingDiv = React.createRef();
     this.homeDiv = React.createRef();
     this.profileDiv = React.createRef();
-    this.monthlyRentalAmountOptions = [
-      { value: 1, label: '0 - $1000' },
-      { value: 2, label: '$1001 - $2000' },
-      { value: 3, label: '$2001 - $3000' },
-      { value: 4, label: '$3001 - $4000' },
-      { value: 5, label: '$4001 - $5000' },
-      { value: 6, label: 'more than 5001$' },
-    ];
-    this.zipcodeOptions = [
-      { value: '35801', label: 'Alabama 35801' },
-      { value: '99501', label: 'Alaska 99501' },
-      { value: '85001', label: 'Arizona 85001' },
-      { value: '94203', label: 'Arkansas 94203' },
-      { value: '90001', label: 'California 90001' },
-
-    ];
-    this.customerAgeOptions = [
-      { value: 1, label: 'less than 21' },
-      { value: 2, label: 'greater than 21' },
-    ];
-    this.productsOptions = [
-      { value: 1, label: 'TV' },
-      { value: 2, label: 'Washing Machine' },
-      { value: 3, label: 'Air Conditioner' },
-    ];
-    this.rentalTenureOptions = [
-      { value: [0, 3], label: '0 - 3' },
-      { value: [3, 6], label: '3 - 6' },
-      { value: [6, -1], label: 'more than 6 months' },
-
+    function createData(name, calories, fat, carbs, protein) {
+      return { name, calories, fat, carbs, protein };
+    }
+    this.rows = [
+      createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+      createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+      createData('Eclair', 262, 16.0, 24, 6.0),
+      createData('Cupcake', 305, 3.7, 67, 4.3),
+      createData('Gingerbread', 356, 16.0, 49, 3.9),
     ];
   }
 
-
-  handleChange = (event, newValue) => {
-    this.setState({ newValue }, () => {
-      // console.log("vall",newValue)
-    });
+  listenScrollEvent = (e) => {
+    if (window.scrollY > 100) {
+      this.setState({ backgroundColor: COLORS.OVERLAY });
+    } else {
+      this.setState({ backgroundColor: COLORS.TRANSPARENT });
+    }
   };
 
+  componentDidMount() {
+    window.addEventListener("scroll", this.listenScrollEvent);
+  }
 
   handleChangeRental = (selectedMonthlyRentalAmountOption) => {
-    this.setState(
-      { selectedMonthlyRentalAmountOption },
-      () => console.log(`Option selected:`, this.state.selectedMonthlyRentalAmountOption)
-    );
+    this.setState({ selectedMonthlyRentalAmountOption });
   };
+
   handleChangeZipcode = (selectedZipcodeOption) => {
-    this.setState(
-      { selectedZipcodeOption },
-      () => console.log(`Option selected:`, this.state.selectedZipcodeOption)
-    );
+    this.setState({ selectedZipcodeOption });
   };
 
   handleChangeAge = (selectedAgeOption) => {
-    this.setState(
-      { selectedAgeOption },
-      () => console.log(`Option selected:`, this.state.selectedAgeOption)
-    );
+    this.setState({ selectedAgeOption });
   };
 
   handleChangeProduct = (selectedProductOption) => {
-    this.setState(
-      { selectedProductOption },
-      () => console.log(`Option selected:`, this.state.selectedProductOption)
-    );
+    this.setState({ selectedProductOption });
   };
 
   handleChangeTenure = (selectedTenureOption) => {
-    this.setState(
-      { selectedTenureOption },
-      () => console.log(`Option selected:`, this.state.selectedTenureOption)
-    );
+    this.setState({ selectedTenureOption });
   };
 
   handleClick(type) {
@@ -127,20 +102,20 @@ export default class App extends React.Component {
         });
       }
     }
-  }
-  listenScrollEvent = (e) => {
-    if (window.scrollY > 100) {
-      console.log("> 400");
-      this.setState({ backgroundColor: "rgba(0, 0, 0, 0.8)" });
-    } else {
-      console.log("else");
-      this.setState({ backgroundColor: "transparent" });
-    }
-  };
+    
 
-  componentDidMount() {
-    window.addEventListener("scroll", this.listenScrollEvent);
   }
+
+  submitRule () {
+    console.log(
+      "..Amount" ,this.state.selectedMonthlyRentalAmountOption.value )
+      console.log( "..Age" , this.state.selectedAgeOption.value)
+      console.log( "..ZipCode" ,this.state.selectedZipcodeOption.value)
+      console.log("..Product Name" , this.state.selectedProductOption.value)
+      console.log("..Rental Tenure" , this.state.selectedTenureOption.value)
+    
+    }
+
   render() {
     return (
       <div ref={this.landingDiv} className="first">
@@ -198,15 +173,14 @@ export default class App extends React.Component {
             <div className="container h-100">
               <div className="row align-items-center h-100">
                 <div className="col-10 col-sm-10 col-md-8 col-lg-6 mx-auto">
-                  <div className="formBorder py-5 px-5">
-                    <form className="w-100 text-center">
+                  <div className="formBorder pb-5 px-5">
+                    <form className="w-100 text-center mt-4">
                       <div className="form-group">
-
-                        <div className="py-1 row">
-                          <div className="col-6">
-                            <p>{STRINGS.MONTHLY_RENTAL_AMOUNT}</p>
+                        <div className="py-1 row justify-content-center">
+                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <p><strong>{STRINGS.MONTHLY_RENTAL_AMOUNT}</strong></p>
                           </div>
-                          <div className="col-6">
+                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
                             <Select
                               value={this.state.selectedMonthlyRentalAmountOption}
                               onChange={this.handleChangeRental}
@@ -216,41 +190,73 @@ export default class App extends React.Component {
                             />
                           </div>
                         </div>
-                        <p>{STRINGS.CUSTOMER_AGE}</p>
-                        <Select
-                          value={this.state.selectedAgeOption}
-                          onChange={this.handleChangeAge}
-                          options={this.customerAgeOptions}
-                          isClearable={true}
-                          isSearchable={false}
-                        />
-                        <p>{STRINGS.ZIPCODE}</p>
-                        <Select
-                          value={this.state.selectedZipcodeOption}
-                          onChange={this.handleChangeZipcode}
-                          options={this.zipcodeOptions}
-                          isClearable={true}
-                          isSearchable={true}
-                        />
-                        <p>{STRINGS.PRODUCT_NAME}</p>
-                        <Select
-                          value={this.state.selectedProductOption}
-                          onChange={this.handleChangeProduct}
-                          options={this.productsOptions}
-                          isClearable={true}
-                          isSearchable={true}
-                        />
-                        <p>{STRINGS.RENTAL_TENURE}</p>
-                        <Select
-                          value={this.state.selectedTenureOption}
-                          onChange={this.handleChangeTenure}
-                          options={this.rentalTenureOptions}
-                          isClearable={true}
-                          isSearchable={false}
-                        />
+
+                        <div className="py-1 row justify-content-center">
+                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <p><strong>{STRINGS.CUSTOMER_AGE}</strong></p>
+                          </div>
+                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <Select
+                              value={this.state.selectedAgeOption}
+                              onChange={this.handleChangeAge}
+                              options={CUSTOMER_AGE_OPTIONS}
+                              isClearable={true}
+                              isSearchable={false}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="py-1 row justify-content-center">
+                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <p><strong>{STRINGS.ZIPCODE}</strong></p>
+                          </div>
+                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <Select
+                              value={this.state.selectedZipcodeOption}
+                              onChange={this.handleChangeZipcode}
+                              options={ZIPCODE_OPTIONS}
+                              isClearable={true}
+                              isSearchable={true}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="py-1 row justify-content-center">
+                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <p><strong>{STRINGS.PRODUCT_NAME}</strong></p>
+                          </div>
+                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <Select
+                              value={this.state.selectedProductOption}
+                              onChange={this.handleChangeProduct}
+                              options={PRODUCT_NAME_OPTIONS}
+                              isClearable={true}
+                              isSearchable={true}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="py-1 row justify-content-center">
+                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <p><strong>{STRINGS.RENTAL_TENURE}</strong></p>
+                          </div>
+                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <Select
+                              value={this.state.selectedTenureOption}
+                              onChange={this.handleChangeTenure}
+                              options={RENTAL_TENURE_OPTIONS}
+                              isClearable={true}
+                              isSearchable={false}
+                            />
+                          </div>
+                        </div>
                       </div>
-                      <button type="submit" className="btn btn-primary">Submit</button>
+
                     </form>
+                    <button onClick={() => {
+                      this.submitRule()
+                    }} className="w-100 btn btn-primary mt-3">Submit
+                      </button>
                   </div>
                 </div>
               </div>
@@ -258,9 +264,38 @@ export default class App extends React.Component {
           </div>
         </div>
         <div ref={this.profileDiv} className="div3">
-          <div className="bbg"></div>
+          <div className="bbg">
+
+          <TableContainer component={Paper}>
+      <Table  aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Dessert (100g serving)</TableCell>
+            <TableCell align="right">Calories</TableCell>
+            <TableCell align="right">Fat&nbsp;(g)</TableCell>
+            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {this.rows.map((row) => (
+            <TableRow key={row.name}>
+              <TableCell component="th" scope="row">
+                {row.name}
+              </TableCell>
+              <TableCell align="right">{row.calories}</TableCell>
+              <TableCell align="right">{row.fat}</TableCell>
+              <TableCell align="right">{row.carbs}</TableCell>
+              <TableCell align="right">{row.protein}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+          </div>
         </div>
-      </div>
+      </div >
     );
   }
 }
