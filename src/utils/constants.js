@@ -51,7 +51,7 @@ const RENTAL_TENURE_OPTIONS = [
 const DATA_TABLE = 
   [
   { title: "Monthly Rental Low", field: "monthly_rent_low" },
-  { title: "Monthly Rental Upper", field: "surmonthly_rent_upr" },
+  { title: "Monthly Rental Upper", field: "monthly_rent_upr" },
   { title: "Customer Age Rental Low", field: "age_rent_low" },
   { title: "Customer Age Rental Upper", field: "age_rent_upr" },
   { title: "ZipCode", field: "zip" },

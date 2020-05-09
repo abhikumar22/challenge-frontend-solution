@@ -269,56 +269,56 @@ export default class App extends React.Component {
         </div>
         <div ref={this.profileDiv} className="div3">
           <div className="bbg">
-
-            <div className="col-sm-10 col-lg-10 col-md-10 col-10 mx-auto">
-
-              <div style={{ maxWidth: "100%" }}>
-                <MaterialTable
-                options={{
-                  pageSizeOptions:[5]
-                }
-                }
-                  columns={DATA_TABLE}
-                  data={DATA_TABLE_VALUE}
-                  title="Rules"
-                  editable={{
-                    onRowAdd: (newData) =>
-                      new Promise((resolve) => {
-                        setTimeout(() => {
-                          resolve();
-                          this.handleClick(1)
-                        }, 600);
-                      }),
-                    onRowUpdate: (newData, oldData) =>
-                      new Promise((resolve) => {
-                        setTimeout(() => {
-                          resolve();
-                          if (oldData) {
-                            this.setState((prevState) => {
-                              const data = [...prevState.data];
-                              data[data.indexOf(oldData)] = newData;
-                              return { ...prevState, data };
-                            });
-                          }
-                        }, 600);
-                      }),
-                    onRowDelete: (oldData) =>
-                      new Promise((resolve) => {
-                        setTimeout(() => {
-                          resolve();
-                          this.setState((prevState) => {
-                            const data = [...prevState.data];
-                            data.splice(data.indexOf(oldData), 1);
-                            return { ...prevState, data };
-                          });
-                        }, 600);
-                      }),
-                  }}
-                />
+            <div className="container h-100">
+              <div className="row align-items-center h-100">
+                <div className="col-11 col-sm-11 col-md-11 col-lg-11 mx-auto py-5">
+                  <MaterialTable
+                    options={{
+                      pageSizeOptions: [5],
+                      search:false,
+                      padding:'Dense'
+                    }
+                    }
+                    columns={DATA_TABLE}
+                    data={DATA_TABLE_VALUE}
+                    title="Rules"
+                    // editable={{
+                    //   onRowAdd: (newData) =>
+                    //     new Promise((resolve) => {
+                    //       setTimeout(() => {
+                    //         resolve();
+                    //         this.handleClick(1)
+                    //       }, 600);
+                    //     }),
+                    //   onRowUpdate: (newData, oldData) =>
+                    //     new Promise((resolve) => {
+                    //       setTimeout(() => {
+                    //         resolve();
+                    //         if (oldData) {
+                    //           this.setState((prevState) => {
+                    //             const data = [...prevState.data];
+                    //             data[data.indexOf(oldData)] = newData;
+                    //             return { ...prevState, data };
+                    //           });
+                    //         }
+                    //       }, 600);
+                    //     }),
+                    //   onRowDelete: (oldData) =>
+                    //     new Promise((resolve) => {
+                    //       setTimeout(() => {
+                    //         resolve();
+                    //         this.setState((prevState) => {
+                    //           const data = [...prevState.data];
+                    //           data.splice(data.indexOf(oldData), 1);
+                    //           return { ...prevState, data };
+                    //         });
+                    //       }, 600);
+                    //     }),
+                    // }}
+                  />
+                </div>
               </div>
             </div>
-
-
           </div>
         </div>
       </div >
