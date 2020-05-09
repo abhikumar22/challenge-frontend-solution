@@ -5,7 +5,9 @@ import { STRINGS } from "../utils/constants";
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      backgroundcolor:'transparent'
+    };
     this.landingDiv = React.createRef()
     this.homeDiv = React.createRef()
     this.profileDiv = React.createRef()
@@ -36,14 +38,28 @@ export default class App extends React.Component {
         })
       }
     }
+  }
+  listenScrollEvent = e => {
+    if (window.scrollY > 100) {
+      console.log("> 400")
+      this.setState({backgroundColor: 'rgba(0, 0, 0, 0.8)'})
+    } else {
+      console.log("else")
+      this.setState({backgroundColor: 'transparent'})
+    }
+  }
 
+  componentDidMount() {
+    window.addEventListener('scroll', this.listenScrollEvent)
   }
   render() {
     return (
       <div ref={this.landingDiv} className="first">
         <div className="bbg">
-          <nav className="navbar navbar-expand-lg navbar-dark fixed-top ml-3 py-4">
-            <h1 onClick={() => { this.handleClick(0) }} className="text-white cursorPointer">{STRINGS.NAV_TITLE}</h1>
+          <nav className="navbar navbar-expand-lg navbar-dark fixed-top py-4" style={{backgroundColor:this.state.backgroundColor}}>
+            <h1 onClick={() => { this.handleClick(0) }} className="text-white cursorPointer">
+            <strong>{STRINGS.NAV_TITLE}</strong>  
+              </h1>
             <button
               className="navbar-toggler"
               type="button"
@@ -72,8 +88,13 @@ export default class App extends React.Component {
             </div>
           </nav>
         </div>
-        <div ref={this.homeDiv} style={{ height: "100vh", backgroundColor: "red" }}></div>
-        <div ref={this.profileDiv} style={{ height: "100vh", backgroundColor: "green" }}></div>
+        <div ref={this.homeDiv} className="div2">
+        <div className="bbg"></div>
+        </div>
+        <div ref={this.profileDiv} className="div3">
+        <div className="bbg"></div>
+
+        </div>
       </div>
     );
   }
