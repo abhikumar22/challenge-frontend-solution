@@ -56,7 +56,7 @@ export default class App extends React.Component {
     return (
       <div ref={this.landingDiv} className="first">
         <div className="bbg">
-          <nav className="navbar navbar-expand-lg navbar-dark fixed-top py-4" style={{backgroundColor:this.state.backgroundColor}}>
+          <nav className="navbar navbar-expand-lg navbar-dark fixed-top py-2" style={{backgroundColor:this.state.backgroundColor}}>
             <h1 onClick={() => { this.handleClick(0) }} className="text-white cursorPointer">
             <strong>{STRINGS.NAV_TITLE}</strong>  
               </h1>
@@ -81,7 +81,7 @@ export default class App extends React.Component {
                 }}>
                   <h4 className="nav-link">{STRINGS.NAV_HOME}</h4>
                 </li>
-                <li className="nav-item active cursorPointer mr-5" onClick={() => { this.handleClick(2) }}>
+                <li className="nav-item active cursorPointer mr-0" onClick={() => { this.handleClick(2) }}>
                   <h4 className="nav-link">{STRINGS.NAV_PROFILE}</h4>
                 </li>
               </ul>
