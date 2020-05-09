@@ -61,13 +61,13 @@ const DATA_TABLE =
   ]
 
   const DATA_TABLE_VALUE = [
-   { monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
-   { monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
-   { monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
-   { monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
-   { monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
-   { monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
-   { monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
+   {monthly_rent_low:'2', monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
+   { monthly_rent_low:'2',monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
+   { monthly_rent_low:'2',monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
+   { monthly_rent_low:'2',monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
+   { monthly_rent_low:'2',monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
+   {monthly_rent_low:'2', monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
+   { monthly_rent_low:'2',monthly_rent_upr:"1",age_rent_low:"2",age_rent_upr:"3",zip:"43434",product:"TV",rental_low:"0",rental_upr:"3"},
 
   ]
 
