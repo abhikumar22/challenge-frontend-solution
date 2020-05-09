@@ -1,6 +1,8 @@
 import React from "react";
 import "../assets/css/style.css";
 import {
+  DATA_TABLE_VALUE,
+  DATA_TABLE,
   STRINGS,
   MONTHLY_RENTAL_AMOUNT_OPTIONS,
   ZIPCODE_OPTIONS,
@@ -18,6 +20,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+
+import MaterialTable from 'material-table';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -102,19 +106,19 @@ export default class App extends React.Component {
         });
       }
     }
-    
+
 
   }
 
-  submitRule () {
+  submitRule() {
     console.log(
-      "..Amount" ,this.state.selectedMonthlyRentalAmountOption.value )
-      console.log( "..Age" , this.state.selectedAgeOption.value)
-      console.log( "..ZipCode" ,this.state.selectedZipcodeOption.value)
-      console.log("..Product Name" , this.state.selectedProductOption.value)
-      console.log("..Rental Tenure" , this.state.selectedTenureOption.value)
-    
-    }
+      "..Amount", this.state.selectedMonthlyRentalAmountOption.value)
+    console.log("..Age", this.state.selectedAgeOption.value)
+    console.log("..ZipCode", this.state.selectedZipcodeOption.value)
+    console.log("..Product Name", this.state.selectedProductOption.value)
+    console.log("..Rental Tenure", this.state.selectedTenureOption.value)
+
+  }
 
   render() {
     return (
@@ -266,32 +270,54 @@ export default class App extends React.Component {
         <div ref={this.profileDiv} className="div3">
           <div className="bbg">
 
-          <TableContainer component={Paper}>
-      <Table  aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {this.rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+            <div className="col-sm-10 col-lg-10 col-md-10 col-10 mx-auto">
+
+              <div style={{ maxWidth: "100%" }}>
+                <MaterialTable
+                options={{
+                  pageSizeOptions:[5]
+                }
+                }
+                  columns={DATA_TABLE}
+                  data={DATA_TABLE_VALUE}
+                  title="Rules"
+                  editable={{
+                    onRowAdd: (newData) =>
+                      new Promise((resolve) => {
+                        setTimeout(() => {
+                          resolve();
+                          this.handleClick(1)
+                        }, 600);
+                      }),
+                    onRowUpdate: (newData, oldData) =>
+                      new Promise((resolve) => {
+                        setTimeout(() => {
+                          resolve();
+                          if (oldData) {
+                            this.setState((prevState) => {
+                              const data = [...prevState.data];
+                              data[data.indexOf(oldData)] = newData;
+                              return { ...prevState, data };
+                            });
+                          }
+                        }, 600);
+                      }),
+                    onRowDelete: (oldData) =>
+                      new Promise((resolve) => {
+                        setTimeout(() => {
+                          resolve();
+                          this.setState((prevState) => {
+                            const data = [...prevState.data];
+                            data.splice(data.indexOf(oldData), 1);
+                            return { ...prevState, data };
+                          });
+                        }, 600);
+                      }),
+                  }}
+                />
+              </div>
+            </div>
+
 
           </div>
         </div>
