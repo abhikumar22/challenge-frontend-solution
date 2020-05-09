@@ -44,3 +44,11 @@ html {
   background-size: cover; /* Resize the background image to cover the entire container */
   height: 100vh;
 }
+
+.formBorder{
+  border-radius: 20px;
+  background-color:#ccf0d5;
+  /* border: 1px solid; */
+  padding: 10px;
+  box-shadow: 5px 10px 18px #888888;
+}
