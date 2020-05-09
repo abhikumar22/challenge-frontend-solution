@@ -11,6 +11,7 @@ import {
   RENTAL_TENURE_OPTIONS,
   COLORS
 } from "../utils/constants";
+import FieldComponent from '../component/FieldComponent'
 import Select from 'react-select';
 
 import Table from '@material-ui/core/Table';
@@ -180,80 +181,39 @@ export default class App extends React.Component {
                   <div className="formBorder pb-5 px-5">
                     <form className="w-100 text-center mt-4">
                       <div className="form-group">
-                        <div className="py-1 row justify-content-center">
-                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <p><strong>{STRINGS.MONTHLY_RENTAL_AMOUNT}</strong></p>
-                          </div>
-                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <Select
-                              value={this.state.selectedMonthlyRentalAmountOption}
-                              onChange={this.handleChangeRental}
-                              options={MONTHLY_RENTAL_AMOUNT_OPTIONS}
-                              isClearable={true}
-                              isSearchable={false}
-                            />
-                          </div>
-                        </div>
+                        <FieldComponent
+                          heading={STRINGS.MONTHLY_RENTAL_AMOUNT}
+                          value={this.state.selectedMonthlyRentalAmountOption}
+                          onChange={this.handleChangeRental.bind(this)}
+                          options={MONTHLY_RENTAL_AMOUNT_OPTIONS}
+                        />
+                        <FieldComponent
+                          heading={STRINGS.CUSTOMER_AGE}
+                          value={this.state.selectedAgeOption}
+                          onChange={this.handleChangeAge.bind(this)}
+                          options={CUSTOMER_AGE_OPTIONS}
+                        />
 
-                        <div className="py-1 row justify-content-center">
-                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <p><strong>{STRINGS.CUSTOMER_AGE}</strong></p>
-                          </div>
-                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <Select
-                              value={this.state.selectedAgeOption}
-                              onChange={this.handleChangeAge}
-                              options={CUSTOMER_AGE_OPTIONS}
-                              isClearable={true}
-                              isSearchable={false}
-                            />
-                          </div>
-                        </div>
+                        <FieldComponent
+                          heading={STRINGS.ZIPCODE}
+                          value={this.state.selectedZipcodeOption}
+                          onChange={this.handleChangeZipcode.bind(this)}
+                          options={ZIPCODE_OPTIONS}
+                        />
 
-                        <div className="py-1 row justify-content-center">
-                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <p><strong>{STRINGS.ZIPCODE}</strong></p>
-                          </div>
-                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <Select
-                              value={this.state.selectedZipcodeOption}
-                              onChange={this.handleChangeZipcode}
-                              options={ZIPCODE_OPTIONS}
-                              isClearable={true}
-                              isSearchable={true}
-                            />
-                          </div>
-                        </div>
+                        <FieldComponent
+                          heading={STRINGS.PRODUCT_NAME}
+                          value={this.state.selectedProductOption}
+                          onChange={this.handleChangeProduct.bind(this)}
+                          options={PRODUCT_NAME_OPTIONS}
+                        />
 
-                        <div className="py-1 row justify-content-center">
-                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <p><strong>{STRINGS.PRODUCT_NAME}</strong></p>
-                          </div>
-                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <Select
-                              value={this.state.selectedProductOption}
-                              onChange={this.handleChangeProduct}
-                              options={PRODUCT_NAME_OPTIONS}
-                              isClearable={true}
-                              isSearchable={true}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="py-1 row justify-content-center">
-                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <p><strong>{STRINGS.RENTAL_TENURE}</strong></p>
-                          </div>
-                          <div className="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <Select
-                              value={this.state.selectedTenureOption}
-                              onChange={this.handleChangeTenure}
-                              options={RENTAL_TENURE_OPTIONS}
-                              isClearable={true}
-                              isSearchable={false}
-                            />
-                          </div>
-                        </div>
+                        <FieldComponent
+                          heading={STRINGS.RENTAL_TENURE}
+                          value={this.state.selectedTenureOption}
+                          onChange={this.handleChangeTenure.bind(this)}
+                          options={RENTAL_TENURE_OPTIONS}
+                        />
                       </div>
 
                     </form>
@@ -275,46 +235,46 @@ export default class App extends React.Component {
                   <MaterialTable
                     options={{
                       pageSizeOptions: [5],
-                      search:false,
-                      padding:'Dense'
+                      search: false,
+                      padding: ('dense')
                     }
                     }
                     columns={DATA_TABLE}
                     data={DATA_TABLE_VALUE}
                     title="Rules"
-                    // editable={{
-                    //   onRowAdd: (newData) =>
-                    //     new Promise((resolve) => {
-                    //       setTimeout(() => {
-                    //         resolve();
-                    //         this.handleClick(1)
-                    //       }, 600);
-                    //     }),
-                    //   onRowUpdate: (newData, oldData) =>
-                    //     new Promise((resolve) => {
-                    //       setTimeout(() => {
-                    //         resolve();
-                    //         if (oldData) {
-                    //           this.setState((prevState) => {
-                    //             const data = [...prevState.data];
-                    //             data[data.indexOf(oldData)] = newData;
-                    //             return { ...prevState, data };
-                    //           });
-                    //         }
-                    //       }, 600);
-                    //     }),
-                    //   onRowDelete: (oldData) =>
-                    //     new Promise((resolve) => {
-                    //       setTimeout(() => {
-                    //         resolve();
-                    //         this.setState((prevState) => {
-                    //           const data = [...prevState.data];
-                    //           data.splice(data.indexOf(oldData), 1);
-                    //           return { ...prevState, data };
-                    //         });
-                    //       }, 600);
-                    //     }),
-                    // }}
+                  // editable={{
+                  //   onRowAdd: (newData) =>
+                  //     new Promise((resolve) => {
+                  //       setTimeout(() => {
+                  //         resolve();
+                  //         this.handleClick(1)
+                  //       }, 600);
+                  //     }),
+                  //   onRowUpdate: (newData, oldData) =>
+                  //     new Promise((resolve) => {
+                  //       setTimeout(() => {
+                  //         resolve();
+                  //         if (oldData) {
+                  //           this.setState((prevState) => {
+                  //             const data = [...prevState.data];
+                  //             data[data.indexOf(oldData)] = newData;
+                  //             return { ...prevState, data };
+                  //           });
+                  //         }
+                  //       }, 600);
+                  //     }),
+                  //   onRowDelete: (oldData) =>
+                  //     new Promise((resolve) => {
+                  //       setTimeout(() => {
+                  //         resolve();
+                  //         this.setState((prevState) => {
+                  //           const data = [...prevState.data];
+                  //           data.splice(data.indexOf(oldData), 1);
+                  //           return { ...prevState, data };
+                  //         });
+                  //       }, 600);
+                  //     }),
+                  // }}
                   />
                 </div>
               </div>

@@ -17,7 +17,7 @@ const COLORS = {
 
 const MONTHLY_RENTAL_AMOUNT_OPTIONS = [
   { value: [0, 1000], label: '0 - $1000' },
-  { value: [3001, 2000], label: '$1001 - $2000' },
+  { value: [1001, 2000], label: '$1001 - $2000' },
   { value: [2001, 3000], label: '$2001 - $3000' },
   { value: [3001, 4000], label: '$3001 - $4000' },
   { value: [4001, 5000], label: '$4001 - $5000' },
