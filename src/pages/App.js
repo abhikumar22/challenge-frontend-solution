@@ -143,7 +143,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div ref={this.landingDiv} className="first">
-        <div className="bbg">
+        <div className="overlayBackground">
           <nav
             className="navbar navbar-expand-lg navbar-dark fixed-top py-2"
             style={{ backgroundColor: COLORS.OVERLAY }}
@@ -194,7 +194,7 @@ export default class App extends React.Component {
             </div>
           </nav>
 
-          <div className="bbg text-black">
+          <div className="overlayBackground text-black">
             <div className="container h-100">
               <div className="row align-items-center h-100">
                 <div className="col-10 col-sm-10 col-md-8 col-lg-6 mx-auto">
@@ -244,7 +244,8 @@ export default class App extends React.Component {
                           this.updateRule();
                         }
                       }}
-                      className="w-100 btn btn-primary mt-3"
+                      className="w-100 btn mt-3"
+                      style={{backgroundColor:COLORS.lIME}}
                     >
                       {this.state.editedData === null
                         ? STRINGS.SUBMIT
@@ -256,47 +257,40 @@ export default class App extends React.Component {
             </div>
           </div>
         </div>
-        <div ref={this.homeDiv} className="div2">
-          <div className="bbg">
-            <div className="container h-100">
-              <div className="row align-items-center h-100">
-                <div className="formBorder2 col-11 col-sm-11 col-md-11 col-lg-12 mx-auto py-5">
-                  <MaterialTable
-                    actions={[
-                      {
-                        // iconProps:[{marginLeft:"100px"}},
-                        tooltip: STRINGS.DELETE_RULE,
-                        icon: STRINGS.DELETE,
-                        onClick: (evt, data) => {
-                          alert(STRINGS.DELETE_RULE_MESSAGE);
-                        },
-                      },
-                      {
-                        tooltip: STRINGS.EDIT_RULE,
-                        icon: STRINGS.EDIT,
-                        onClick: (evt, data) => {
-                          this.setState({ editedData: data }, () => {
-                            this.setDataOnEdit(this.state.editedData);
-                            this.handleClick(0);
-                          });
-                        },
-                      },
-                    ]}
-                    options={{
-                      showEmptyDataSourceMessage: true,
-                      pageSizeOptions: [5],
-                      search: false,
-                      padding: STRINGS.DENSE,
-                      tableLayout: "auto"
-                    }}
-                    columns={DATA_TABLE}
-                    data={DATA_TABLE_VALUE}
-                    title={STRINGS.RULE}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+        <div ref={this.homeDiv}>
+          <MaterialTable
+            style={{}}
+            actions={[
+              {
+                // iconProps:[{marginLeft:"100px"}},
+                tooltip: STRINGS.DELETE_RULE,
+                icon: STRINGS.DELETE,
+                onClick: (evt, data) => {
+                  alert(STRINGS.DELETE_RULE_MESSAGE+".."+JSON.stringify(data));
+                },
+              },
+              {
+                tooltip: STRINGS.EDIT_RULE,
+                icon: STRINGS.EDIT,
+                onClick: (evt, data) => {
+                  this.setState({ editedData: data }, () => {
+                    this.setDataOnEdit(this.state.editedData);
+                    this.handleClick(0);
+                  });
+                },
+              },
+            ]}
+            options={{
+              showEmptyDataSourceMessage: true,
+              pageSizeOptions: [10],
+              pageSize: 7,
+              search: false,
+              tableLayout: "auto"
+            }}
+            columns={DATA_TABLE}
+            data={DATA_TABLE_VALUE}
+            title={STRINGS.RULE}
+          />
         </div>
       </div>
     );

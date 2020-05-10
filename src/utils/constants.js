@@ -26,7 +26,8 @@ const FIELD_TYPE={
 
 const COLORS = {
   TRANSPARENT: "transparent",
-  OVERLAY: "rgba(0, 0, 0, 0.8)"
+  OVERLAY: "rgba(0, 0, 0, 0.8)",
+  lIME:"#bdd9b6"
 }
 
 const MONTHLY_RENTAL_AMOUNT_OPTIONS = [
