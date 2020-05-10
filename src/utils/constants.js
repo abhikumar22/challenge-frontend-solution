@@ -57,8 +57,8 @@ const CUSTOMER_AGE_OPTIONS = [
 ];
 const PRODUCT_NAME_OPTIONS = [
   { value: 'TV', label: 'TV' },
-  { value: 'Washing Machine', label: 'Washing Machine' },
-  { value: 'Air Conditioner', label: 'Air Conditioner' },
+  { value: 'Fridge', label: 'Fridge' },
+  { value: 'AC', label: 'AC' },
 ];
 const RENTAL_TENURE_OPTIONS = [
   { value: [0, 2], label: 'less than 3 months' },

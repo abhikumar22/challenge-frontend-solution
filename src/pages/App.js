@@ -104,11 +104,11 @@ export default class App extends React.Component {
 
   updateRule() {
     const body = {
-      rentalAmount: this.state.selectedMonthlyRentalAmountOption === null ? null : this.state.selectedMonthlyRentalAmountOption.value,
-      customerAge: this.state.selectedAgeOption === null ? null : this.state.selectedAgeOption.value,
-      zipCode: this.state.selectedZipcodeOption === null ? null : this.state.selectedZipcodeOption.value,
-      productName: this.state.selectedProductOption === null ? null : this.state.selectedProductOption.value,
-      rentalTenure: this.state.selectedTenureOption === null ? null : this.state.selectedTenureOption.value,
+entalAmount: this.state.selectedMonthlyRentalAmountOption === null ? null : this.state.selectedMonthlyRentalAmountOption.value,
+        customerAge: this.state.selectedAgeOption === null ? null : this.state.selectedAgeOption.value,
+        zipCode: this.state.selectedZipcodeOption === null ? null : this.state.selectedZipcodeOption.value,
+        productName: this.state.selectedProductOption === null ? null : this.state.selectedProductOption.value,
+        rentalTenure: this.state.selectedTenureOption === null ? null : this.state.selectedTenureOption.value,
     };
     // here we have to do a fetch call( React API Call ) to update the particular Rule, 
     // so the above body with the params is send as POST data
