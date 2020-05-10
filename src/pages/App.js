@@ -9,20 +9,10 @@ import {
   CUSTOMER_AGE_OPTIONS,
   PRODUCT_NAME_OPTIONS,
   RENTAL_TENURE_OPTIONS,
-  COLORS
+  COLORS,
 } from "../utils/constants";
-import FieldComponent from '../component/FieldComponent'
-import Select from 'react-select';
-
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-
-import MaterialTable from 'material-table';
+import FieldComponent from "../component/FieldComponent";
+import MaterialTable from "material-table";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -34,7 +24,7 @@ export default class App extends React.Component {
       selectedAgeOption: null,
       selectedTenureOption: null,
       selectedProductOption: null,
-      newValue: []
+      editedData: {},
     };
     this.landingDiv = React.createRef();
     this.homeDiv = React.createRef();
@@ -43,11 +33,11 @@ export default class App extends React.Component {
       return { name, calories, fat, carbs, protein };
     }
     this.rows = [
-      createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-      createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-      createData('Eclair', 262, 16.0, 24, 6.0),
-      createData('Cupcake', 305, 3.7, 67, 4.3),
-      createData('Gingerbread', 356, 16.0, 49, 3.9),
+      createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+      createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+      createData("Eclair", 262, 16.0, 24, 6.0),
+      createData("Cupcake", 305, 3.7, 67, 4.3),
+      createData("Gingerbread", 356, 16.0, 49, 3.9),
     ];
   }
 
@@ -107,18 +97,35 @@ export default class App extends React.Component {
         });
       }
     }
-
-
   }
 
   submitRule() {
-    console.log(
-      "..Amount", this.state.selectedMonthlyRentalAmountOption.value)
-    console.log("..Age", this.state.selectedAgeOption.value)
-    console.log("..ZipCode", this.state.selectedZipcodeOption.value)
-    console.log("..Product Name", this.state.selectedProductOption.value)
-    console.log("..Rental Tenure", this.state.selectedTenureOption.value)
+    console.log("..Amount", this.state.selectedMonthlyRentalAmountOption.value);
+    console.log("..Age", this.state.selectedAgeOption.value);
+    console.log("..ZipCode", this.state.selectedZipcodeOption.value);
+    console.log("..Product Name", this.state.selectedProductOption.value);
+    console.log("..Rental Tenure", this.state.selectedTenureOption.value);
+  }
 
+  setDataOnEdit(editedData) {
+    this.setState({
+      selectedMonthlyRentalAmountOption:this.getSelectedValue(MONTHLY_RENTAL_AMOUNT_OPTIONS,editedData.monthly_rent_low,0),
+      selectedAgeOption:this.getSelectedValue(CUSTOMER_AGE_OPTIONS,editedData.age_rent_low,0),
+      selectedZipcodeOption:this.getSelectedValue(ZIPCODE_OPTIONS,editedData.zip,1),
+      selectedProductOption:this.getSelectedValue(PRODUCT_NAME_OPTIONS,editedData.product,1 ),
+      selectedTenureOption:this.getSelectedValue(RENTAL_TENURE_OPTIONS,editedData.rental_low,0),
+    })
+  }
+
+  getSelectedValue(array,toFind,type){
+    let result;
+    if(type===1){
+      result = array.filter(data => data.value === toFind)
+    }else{
+      result = array.filter(data => parseInt(data.value[0]) === parseInt(toFind))
+
+    }
+    return result[0]
   }
 
   render() {
@@ -195,6 +202,7 @@ export default class App extends React.Component {
                         />
 
                         <FieldComponent
+                          // defaultValue={{value: '35801', label: 'Alabama 35801'}}
                           heading={STRINGS.ZIPCODE}
                           value={this.state.selectedZipcodeOption}
                           onChange={this.handleChangeZipcode.bind(this)}
@@ -215,73 +223,74 @@ export default class App extends React.Component {
                           options={RENTAL_TENURE_OPTIONS}
                         />
                       </div>
-
                     </form>
-                    <button onClick={() => {
-                      this.submitRule()
-                    }} className="w-100 btn btn-primary mt-3">Submit
-                      </button>
+                    <button
+                      onClick={() => {
+                        this.submitRule();
+                      }}
+                      className="w-100 btn btn-primary mt-3"
+                    >
+                      {!this.state.editedData ? STRINGS.SUBMIT : STRINGS.UPDATE}
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        
         <div ref={this.profileDiv} className="div3">
+
           <div className="bbg">
+         
+         
             <div className="container h-100">
               <div className="row align-items-center h-100">
-                <div className="col-11 col-sm-11 col-md-11 col-lg-11 mx-auto py-5">
+                <div className="col-11 col-sm-11 col-md-11 col-lg-12 mx-auto py-5">
                   <MaterialTable
+                    actions={[
+                      {
+                        // iconProps:[{marginLeft:"100px"}},
+                        tooltip: "Remove All Selected Users",
+                        icon: "delete",
+                        onClick: (evt, data) => {
+                          alert("You want to delete " + data.length + " rows");
+                          console.log("data", data);
+                          console.log("evt", evt);
+                        },
+                      },
+                      {
+                        tooltip: "Edit this rule ?",
+                        icon: "edit",
+                        onClick: (evt, data) => {
+                          this.setState({ editedData: data }, () => {
+                            this.setDataOnEdit(this.state.editedData)
+                            this.handleClick(1);
+                          });
+                        },
+                      },
+                    ]}
                     options={{
+                      showEmptyDataSourceMessage: true,
                       pageSizeOptions: [5],
                       search: false,
-                      padding: ('dense')
-                    }
-                    }
+                      padding: "dense",
+                    }}
                     columns={DATA_TABLE}
                     data={DATA_TABLE_VALUE}
                     title="Rules"
-                  // editable={{
-                  //   onRowAdd: (newData) =>
-                  //     new Promise((resolve) => {
-                  //       setTimeout(() => {
-                  //         resolve();
-                  //         this.handleClick(1)
-                  //       }, 600);
-                  //     }),
-                  //   onRowUpdate: (newData, oldData) =>
-                  //     new Promise((resolve) => {
-                  //       setTimeout(() => {
-                  //         resolve();
-                  //         if (oldData) {
-                  //           this.setState((prevState) => {
-                  //             const data = [...prevState.data];
-                  //             data[data.indexOf(oldData)] = newData;
-                  //             return { ...prevState, data };
-                  //           });
-                  //         }
-                  //       }, 600);
-                  //     }),
-                  //   onRowDelete: (oldData) =>
-                  //     new Promise((resolve) => {
-                  //       setTimeout(() => {
-                  //         resolve();
-                  //         this.setState((prevState) => {
-                  //           const data = [...prevState.data];
-                  //           data.splice(data.indexOf(oldData), 1);
-                  //           return { ...prevState, data };
-                  //         });
-                  //       }, 600);
-                  //     }),
-                  // }}
                   />
                 </div>
               </div>
             </div>
+         
+         
           </div>
+        
+        
         </div>
-      </div >
+      
+      </div>
     );
   }
 }

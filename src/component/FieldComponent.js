@@ -11,6 +11,7 @@ import Select from 'react-select';
                 </div>
                 <div className="col-12 col-sm-12 col-md-6 col-lg-6">
                     <Select
+                        defaultValue={this.props.defaultValue}
                         value={this.props.value}
                         onChange={this.props.onChange}
                         options={this.props.options}
