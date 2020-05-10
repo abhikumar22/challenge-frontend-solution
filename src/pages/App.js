@@ -24,7 +24,7 @@ export default class App extends React.Component {
       selectedAgeOption: null,
       selectedTenureOption: null,
       selectedProductOption: null,
-      editedData: {},
+      editedData: null,
     };
     this.landingDiv = React.createRef();
     this.homeDiv = React.createRef();
@@ -230,7 +230,7 @@ export default class App extends React.Component {
                       }}
                       className="w-100 btn btn-primary mt-3"
                     >
-                      {!this.state.editedData ? STRINGS.SUBMIT : STRINGS.UPDATE}
+                      {this.state.editedData===null ? STRINGS.SUBMIT : STRINGS.UPDATE}
                     </button>
                   </div>
                 </div>
