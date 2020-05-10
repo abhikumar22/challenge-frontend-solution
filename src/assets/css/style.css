@@ -9,12 +9,11 @@ html {
 }
 
 .first {
-  background-image: url("../images/wall1.jpg"); /* The image used */
-  background-color: rgba(0, 0, 0, 0.50); /* Used if the image is unavailable */
-  /* height: 500px;  You must set a specified height */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
+  background-image: url("../images/wall1.jpg");
+  background-color: rgba(0, 0, 0, 0.50); 
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover; 
   height: 100vh;
   background-color:'white';
 }
@@ -25,19 +24,17 @@ html {
 
 
 .div2{
-  background-image: url("../images/wall2.jpg"); /* The image used */
-  background-color: rgba(0, 0, 0, 0.603); /* Used if the image is unavailable */
-  /* height: 500px;  You must set a specified height */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
+  background-image: url("../images/wall2.jpg"); 
+  background-color: rgba(0, 0, 0, 0.603); 
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover; 
   height: 100vh;
 }
 
 .formBorder{
   border-radius: 20px;
   background-color:#ccf0d5;
-  /* border: 1px solid; */
   padding: 10px;
   box-shadow: 5px 10px 18px #888888;
 }

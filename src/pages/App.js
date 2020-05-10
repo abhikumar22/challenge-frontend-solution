@@ -16,6 +16,8 @@ import FieldComponent from "../component/FieldComponent";
 import MaterialTable from "material-table";
 import { getSelectedValue } from "../utils/HelperFunctions";
 
+import { SemipolarLoading } from "react-loadingg";
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -27,6 +29,7 @@ export default class App extends React.Component {
       selectedTenureOption: null,
       selectedProductOption: null,
       editedData: null,
+      loading:true,
     };
     this.landingDiv = React.createRef();
     this.homeDiv = React.createRef();
@@ -41,6 +44,7 @@ export default class App extends React.Component {
   // };
 
   componentDidMount() {
+    this.setState({loading:false})
     // window.addEventListener("scroll", this.listenScrollEvent);
   }
 
@@ -149,20 +153,21 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div ref={this.landingDiv} className="first">
+      <div>
+     {!this.state.loading? <div ref={this.landingDiv} className="first">
         <div className="bbg">
           <nav
             className="navbar navbar-expand-lg navbar-dark fixed-top py-2"
             style={{ backgroundColor:COLORS.OVERLAY }}
           >
-            <h1
+            <h2
               onClick={() => {
                 this.handleClick(0);
               }}
               className="text-white cursorPointer"
             >
               <strong>{STRINGS.NAV_TITLE}</strong>
-            </h1>
+            </h2>
             <button
               className="navbar-toggler"
               type="button"
@@ -185,7 +190,7 @@ export default class App extends React.Component {
                     this.handleClick(0);
                   }}
                 >
-                  <h4 className="nav-link">{STRINGS.NAV_HOME}</h4>
+                  <h5 className="nav-link">{STRINGS.NAV_HOME}</h5>
                 </li>
                 <li
                   className="nav-item active cursorPointer mr-0"
@@ -193,7 +198,7 @@ export default class App extends React.Component {
                     this.handleClick(1);
                   }}
                 >
-                  <h4 className="nav-link">{STRINGS.NAV_PROFILE}</h4>
+                  <h5 className="nav-link">{STRINGS.NAV_PROFILE}</h5>
                 </li>
               </ul>
             </div>
@@ -303,6 +308,11 @@ export default class App extends React.Component {
           </div>
         </div>
       </div>
+     :
+     <div>
+       <SemipolarLoading color={"yellow"} />
+     </div>
+     } </div>
     );
   }
 }

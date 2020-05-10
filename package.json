@@ -15,6 +15,7 @@
     "react-circular-progressbar": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-icons": "^3.9.0",
+    "react-loadingg": "^1.7.2",
     "react-scripts": "3.4.1",
     "react-select": "^3.1.0"
   },
