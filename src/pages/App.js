@@ -33,17 +33,6 @@ export default class App extends React.Component {
     this.profileDiv = React.createRef();
   }
 
-  // listenScrollEvent = (e) => {
-  //   this.setState({
-  //     backgroundColor:
-  //       window.scrollY > 100 ? COLORS.OVERLAY : COLORS.TRANSPARENT,
-  //   });
-  // };
-
-  componentDidMount() {
-    // window.addEventListener("scroll", this.listenScrollEvent);
-  }
-
   handleChangeRental = (selectedMonthlyRentalAmountOption) => {
     this.setState({ selectedMonthlyRentalAmountOption });
   };
@@ -90,16 +79,20 @@ export default class App extends React.Component {
   }
 
   submitRule() {
-    const body = {
-      rentalAmount: this.state.selectedMonthlyRentalAmountOption.value,
-      customerAge: this.state.selectedAgeOption.value,
-      zipCode: this.state.selectedZipcodeOption.value,
-      productName: this.state.selectedProductOption.value,
-      rentalTenure: this.state.selectedTenureOption.value,
-    };
-    // console.log("body",body)
-    alert("Body of POST call for adding a new Rule\n" + JSON.stringify(body));
-    window.location.reload();
+    if (this.state.selectedMonthlyRentalAmountOption === null && this.state.selectedAgeOption === null && this.state.selectedZipcodeOption === null && this.state.selectedProductOption === null && this.state.selectedTenureOption === null) {
+      alert("Please Select atleast one rule");
+    } else {
+      const body = {
+        rentalAmount: this.state.selectedMonthlyRentalAmountOption === null ? null : this.state.selectedMonthlyRentalAmountOption.value,
+        customerAge: this.state.selectedAgeOption === null ? null : this.state.selectedAgeOption.value,
+        zipCode: this.state.selectedZipcodeOption === null ? null : this.state.selectedZipcodeOption.value,
+        productName: this.state.selectedProductOption === null ? null : this.state.selectedProductOption.value,
+        rentalTenure: this.state.selectedTenureOption === null ? null : this.state.selectedTenureOption.value,
+      };
+      // console.log("body",body)
+      alert("Body of POST call for adding a new Rule\n" + JSON.stringify(body));
+      window.location.reload();
+    }
   }
 
   updateRule() {
@@ -119,27 +112,27 @@ export default class App extends React.Component {
 
   setDataOnEdit(editedData) {
     this.setState({
-      selectedMonthlyRentalAmountOption: getSelectedValue(
+      selectedMonthlyRentalAmountOption: editedData.monthly_rent_low === null ? null : getSelectedValue(
         MONTHLY_RENTAL_AMOUNT_OPTIONS,
         editedData.monthly_rent_low,
         FIELD_TYPE.ARRAY
       ),
-      selectedAgeOption: getSelectedValue(
+      selectedAgeOption: editedData.age_low === null ? null : getSelectedValue(
         CUSTOMER_AGE_OPTIONS,
-        editedData.age_rent_low,
+        editedData.age_low,
         FIELD_TYPE.ARRAY
       ),
-      selectedZipcodeOption: getSelectedValue(
+      selectedZipcodeOption: editedData.zip === null ? null : getSelectedValue(
         ZIPCODE_OPTIONS,
         editedData.zip,
         FIELD_TYPE.NUMBER
       ),
-      selectedProductOption: getSelectedValue(
+      selectedProductOption: editedData.product === null ? null : getSelectedValue(
         PRODUCT_NAME_OPTIONS,
         editedData.product,
         FIELD_TYPE.NUMBER
       ),
-      selectedTenureOption: getSelectedValue(
+      selectedTenureOption: editedData.rental_low === null ? null : getSelectedValue(
         RENTAL_TENURE_OPTIONS,
         editedData.rental_low,
         FIELD_TYPE.ARRAY
@@ -153,7 +146,7 @@ export default class App extends React.Component {
         <div className="bbg">
           <nav
             className="navbar navbar-expand-lg navbar-dark fixed-top py-2"
-            style={{ backgroundColor:COLORS.OVERLAY }}
+            style={{ backgroundColor: COLORS.OVERLAY }}
           >
             <h2
               onClick={() => {
@@ -180,7 +173,8 @@ export default class App extends React.Component {
             >
               <ul className="navbar-nav ml-auto">
                 <li
-                  className="nav-item active cursorPointer mr-5"
+                  data-toggle="collapse" data-target=".navbar-collapse.show"
+                  className="nav-item active cursorPointer mr-5 "
                   onClick={() => {
                     this.handleClick(0);
                   }}
@@ -188,6 +182,7 @@ export default class App extends React.Component {
                   <h5 className="nav-link">{STRINGS.NAV_HOME}</h5>
                 </li>
                 <li
+                  data-toggle="collapse" data-target=".navbar-collapse.show"
                   className="nav-item active cursorPointer mr-0"
                   onClick={() => {
                     this.handleClick(1);
@@ -292,6 +287,7 @@ export default class App extends React.Component {
                       pageSizeOptions: [5],
                       search: false,
                       padding: STRINGS.DENSE,
+                      tableLayout: "auto"
                     }}
                     columns={DATA_TABLE}
                     data={DATA_TABLE_VALUE}

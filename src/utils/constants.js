@@ -66,8 +66,8 @@ const DATA_TABLE =
   [
     { title: "Monthly Rental Low", field: "monthly_rent_low" },
     { title: "Monthly Rental Upper", field: "monthly_rent_upr" },
-    { title: "Customer Age Rental Low", field: "age_rent_low" },
-    { title: "Customer Age Rental Upper", field: "age_rent_upr" },
+    { title: "Customer Age Rental Low", field: "age_low" },
+    { title: "Customer Age Rental Upper", field: "age_upr" },
     { title: "ZipCode", field: "zip" },
     { title: "Product Name", field: "product" },
     { title: "Rental Tenure Low", field: "rental_low" },
@@ -75,13 +75,18 @@ const DATA_TABLE =
   ]
 
 const DATA_TABLE_VALUE = [
-  { monthly_rent_low: '1001', monthly_rent_upr: "2000", age_rent_low: "0", age_rent_upr: "20", zip: "35801", product: "TV", rental_low: "3", rental_upr: "5" },
-  { monthly_rent_low: '3001', monthly_rent_upr: "4000", age_rent_low: "21", age_rent_upr: "-1", zip: "94203", product: "Washing Machine", rental_low: "0", rental_upr: "3" },
-  { monthly_rent_low: '1001', monthly_rent_upr: "2000", age_rent_low: "21", age_rent_upr: "-1", zip: "35801", product: "TV", rental_low: "3", rental_upr: "5" },
-  { monthly_rent_low: '5001', monthly_rent_upr: "-1", age_rent_low: "0", age_rent_upr: "20", zip: "94203", product: "Washing Machine", rental_low: "6", rental_upr: "-1" },
-  { monthly_rent_low: '5001', monthly_rent_upr: "-1", age_rent_low: "0", age_rent_upr: "20", zip: "90001", product: "TV", rental_low: "0", rental_upr: "2" },
-  { monthly_rent_low: '1001', monthly_rent_upr: "2000", age_rent_low: "21", age_rent_upr: "-1", zip: "99501", product: "TV", rental_low: "6", rental_upr: "-1" },
-  { monthly_rent_low: '0', monthly_rent_upr: "1000", age_rent_low: "0", age_rent_upr: "20", zip: "85001", product: "Air Conditioner", rental_low: "3", rental_upr: "5" },
+  { monthly_rent_low: '1001', monthly_rent_upr: "2000", age_low: "0", age_upr: "20", zip: "35801", product: "TV", rental_low: "3", rental_upr: "5" },
+  { monthly_rent_low: null, monthly_rent_upr: null, age_low: "21", age_upr: "-1", zip: null, product: null, rental_low: null, rental_upr: null },
+  { monthly_rent_low: '3001', monthly_rent_upr: "4000", age_low: "21", age_upr: "-1", zip: "94203", product: "Fridge", rental_low: "0", rental_upr: "3" },
+  { monthly_rent_low: '1001', monthly_rent_upr: "2000", age_low: "21", age_upr: "-1", zip: "35801", product: "TV", rental_low: "3", rental_upr: "5" },
+  
+  { monthly_rent_low: '0', monthly_rent_upr: "1000", age_low: null, age_upr: null, zip: null, product: "TV", rental_low: null, rental_upr: null },
+  
+  { monthly_rent_low: '5001', monthly_rent_upr: "-1", age_low: "0", age_upr: "20", zip: "94203", product: "Fridge", rental_low: "6", rental_upr: "-1" },
+  { monthly_rent_low: '5001', monthly_rent_upr: "-1", age_low: "0", age_upr: "20", zip: "90001", product: "TV", rental_low: "0", rental_upr: "2" },
+  { monthly_rent_low: '1001', monthly_rent_upr: "2000", age_low: "21", age_upr: "-1", zip: "99501", product: "TV", rental_low: "6", rental_upr: "-1" },
+  { monthly_rent_low: '0', monthly_rent_upr: "1000", age_low: "0", age_upr: "20", zip: "85001", product: "Fridge", rental_low: "3", rental_upr: "5" },
+  { monthly_rent_low: null, monthly_rent_upr: null, age_low: null, age_upr: null, zip: null, product: null, rental_low: "3", rental_upr: "5" },
 ]
 
 
