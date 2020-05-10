@@ -15,7 +15,7 @@ html {
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
-  height: 100vh;
+  height: 120vh;
   background-color:'white';
 }
 
@@ -27,16 +27,6 @@ html {
 
 .div2{
   background-image: url("../images/wall2.jpg"); /* The image used */
-  background-color: rgba(0, 0, 0, 0.603); /* Used if the image is unavailable */
-  /* height: 500px;  You must set a specified height */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover; /* Resize the background image to cover the entire container */
-  height: 100vh;
-}
-
-.div3{
-  background-image: url("../images/wall3.jpeg"); 
   background-color: rgba(0, 0, 0, 0.603); /* Used if the image is unavailable */
   /* height: 500px;  You must set a specified height */
   background-position: center; /* Center the image */

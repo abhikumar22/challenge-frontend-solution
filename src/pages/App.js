@@ -1,6 +1,7 @@
 import React from "react";
 import "../assets/css/style.css";
 import {
+  FIELD_TYPE,
   DATA_TABLE_VALUE,
   DATA_TABLE,
   STRINGS,
@@ -13,12 +14,13 @@ import {
 } from "../utils/constants";
 import FieldComponent from "../component/FieldComponent";
 import MaterialTable from "material-table";
+import { getSelectedValue } from "../utils/HelperFunctions";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      backgroundcolor: COLORS.TRANSPARENT,
+      backgroundcolor: COLORS.OVERLAY,
       selectedMonthlyRentalAmountOption: null,
       selectedZipcodeOption: null,
       selectedAgeOption: null,
@@ -29,28 +31,17 @@ export default class App extends React.Component {
     this.landingDiv = React.createRef();
     this.homeDiv = React.createRef();
     this.profileDiv = React.createRef();
-    function createData(name, calories, fat, carbs, protein) {
-      return { name, calories, fat, carbs, protein };
-    }
-    this.rows = [
-      createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-      createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-      createData("Eclair", 262, 16.0, 24, 6.0),
-      createData("Cupcake", 305, 3.7, 67, 4.3),
-      createData("Gingerbread", 356, 16.0, 49, 3.9),
-    ];
   }
 
-  listenScrollEvent = (e) => {
-    if (window.scrollY > 100) {
-      this.setState({ backgroundColor: COLORS.OVERLAY });
-    } else {
-      this.setState({ backgroundColor: COLORS.TRANSPARENT });
-    }
-  };
+  // listenScrollEvent = (e) => {
+  //   this.setState({
+  //     backgroundColor:
+  //       window.scrollY > 100 ? COLORS.OVERLAY : COLORS.TRANSPARENT,
+  //   });
+  // };
 
   componentDidMount() {
-    window.addEventListener("scroll", this.listenScrollEvent);
+    // window.addEventListener("scroll", this.listenScrollEvent);
   }
 
   handleChangeRental = (selectedMonthlyRentalAmountOption) => {
@@ -74,7 +65,6 @@ export default class App extends React.Component {
   };
 
   handleClick(type) {
-    console.log(type);
     if (type === 0) {
       if (this.landingDiv.current) {
         this.landingDiv.current.scrollIntoView({
@@ -100,32 +90,61 @@ export default class App extends React.Component {
   }
 
   submitRule() {
-    console.log("..Amount", this.state.selectedMonthlyRentalAmountOption.value);
-    console.log("..Age", this.state.selectedAgeOption.value);
-    console.log("..ZipCode", this.state.selectedZipcodeOption.value);
-    console.log("..Product Name", this.state.selectedProductOption.value);
-    console.log("..Rental Tenure", this.state.selectedTenureOption.value);
+    const body = {
+      rentalAmount: this.state.selectedMonthlyRentalAmountOption.value,
+      customerAge: this.state.selectedAgeOption.value,
+      zipCode: this.state.selectedZipcodeOption.value,
+      productName: this.state.selectedProductOption.value,
+      rentalTenure: this.state.selectedTenureOption.value,
+    };
+    // console.log("body",body)
+    alert("Body of POST call for adding a new Rule\n" + JSON.stringify(body));
+    window.location.reload();
+  }
+
+  updateRule() {
+    const body = {
+      rentalAmount: this.state.selectedMonthlyRentalAmountOption.value,
+      customerAge: this.state.selectedAgeOption.value,
+      zipCode: this.state.selectedZipcodeOption.value,
+      productName: this.state.selectedProductOption.value,
+      rentalTenure: this.state.selectedTenureOption.value,
+    };
+    // console.log("body",body)
+    alert(
+      "Body of POST call for Editing an existing rule\n" + JSON.stringify(body)
+    );
+    window.location.reload();
   }
 
   setDataOnEdit(editedData) {
     this.setState({
-      selectedMonthlyRentalAmountOption:this.getSelectedValue(MONTHLY_RENTAL_AMOUNT_OPTIONS,editedData.monthly_rent_low,0),
-      selectedAgeOption:this.getSelectedValue(CUSTOMER_AGE_OPTIONS,editedData.age_rent_low,0),
-      selectedZipcodeOption:this.getSelectedValue(ZIPCODE_OPTIONS,editedData.zip,1),
-      selectedProductOption:this.getSelectedValue(PRODUCT_NAME_OPTIONS,editedData.product,1 ),
-      selectedTenureOption:this.getSelectedValue(RENTAL_TENURE_OPTIONS,editedData.rental_low,0),
-    })
-  }
-
-  getSelectedValue(array,toFind,type){
-    let result;
-    if(type===1){
-      result = array.filter(data => data.value === toFind)
-    }else{
-      result = array.filter(data => parseInt(data.value[0]) === parseInt(toFind))
-
-    }
-    return result[0]
+      selectedMonthlyRentalAmountOption: getSelectedValue(
+        MONTHLY_RENTAL_AMOUNT_OPTIONS,
+        editedData.monthly_rent_low,
+        FIELD_TYPE.ARRAY
+      ),
+      selectedAgeOption: getSelectedValue(
+        CUSTOMER_AGE_OPTIONS,
+        editedData.age_rent_low,
+        FIELD_TYPE.ARRAY
+      ),
+      selectedZipcodeOption: getSelectedValue(
+        ZIPCODE_OPTIONS,
+        editedData.zip,
+        FIELD_TYPE.NUMBER
+      ),
+      selectedProductOption: getSelectedValue(
+        PRODUCT_NAME_OPTIONS,
+        editedData.product,
+        FIELD_TYPE.NUMBER
+      ),
+      selectedTenureOption: getSelectedValue(
+        RENTAL_TENURE_OPTIONS,
+        editedData.rental_low,
+        FIELD_TYPE.ARRAY
+      ),
+    });
   }
 
   render() {
@@ -134,7 +153,7 @@ export default class App extends React.Component {
         <div className="bbg">
           <nav
             className="navbar navbar-expand-lg navbar-dark fixed-top py-2"
-            style={{ backgroundColor: this.state.backgroundColor }}
+            style={{ backgroundColor:COLORS.OVERLAY }}
           >
             <h1
               onClick={() => {
@@ -163,7 +182,7 @@ export default class App extends React.Component {
                 <li
                   className="nav-item active cursorPointer mr-5"
                   onClick={() => {
-                    this.handleClick(1);
+                    this.handleClick(0);
                   }}
                 >
                   <h4 className="nav-link">{STRINGS.NAV_HOME}</h4>
@@ -171,7 +190,7 @@ export default class App extends React.Component {
                 <li
                   className="nav-item active cursorPointer mr-0"
                   onClick={() => {
-                    this.handleClick(2);
+                    this.handleClick(1);
                   }}
                 >
                   <h4 className="nav-link">{STRINGS.NAV_PROFILE}</h4>
@@ -179,8 +198,7 @@ export default class App extends React.Component {
               </ul>
             </div>
           </nav>
-        </div>
-        <div ref={this.homeDiv} className="div2">
+
           <div className="bbg text-black">
             <div className="container h-100">
               <div className="row align-items-center h-100">
@@ -202,7 +220,6 @@ export default class App extends React.Component {
                         />
 
                         <FieldComponent
-                          // defaultValue={{value: '35801', label: 'Alabama 35801'}}
                           heading={STRINGS.ZIPCODE}
                           value={this.state.selectedZipcodeOption}
                           onChange={this.handleChangeZipcode.bind(this)}
@@ -226,11 +243,17 @@ export default class App extends React.Component {
                     </form>
                     <button
                       onClick={() => {
-                        this.submitRule();
+                        if (this.state.editedData === null) {
+                          this.submitRule();
+                        } else {
+                          this.updateRule();
+                        }
                       }}
                       className="w-100 btn btn-primary mt-3"
                     >
-                      {this.state.editedData===null ? STRINGS.SUBMIT : STRINGS.UPDATE}
+                      {this.state.editedData === null
+                        ? STRINGS.SUBMIT
+                        : STRINGS.UPDATE}
                     </button>
                   </div>
                 </div>
@@ -238,12 +261,8 @@ export default class App extends React.Component {
             </div>
           </div>
         </div>
-        
-        <div ref={this.profileDiv} className="div3">
-
+        <div ref={this.homeDiv} className="div2">
           <div className="bbg">
-         
-         
             <div className="container h-100">
               <div className="row align-items-center h-100">
                 <div className="col-11 col-sm-11 col-md-11 col-lg-12 mx-auto py-5">
@@ -251,21 +270,19 @@ export default class App extends React.Component {
                     actions={[
                       {
                         // iconProps:[{marginLeft:"100px"}},
-                        tooltip: "Remove All Selected Users",
-                        icon: "delete",
+                        tooltip: STRINGS.DELETE_RULE,
+                        icon: STRINGS.DELETE,
                         onClick: (evt, data) => {
-                          alert("You want to delete " + data.length + " rows");
-                          console.log("data", data);
-                          console.log("evt", evt);
+                          alert(STRINGS.DELETE_RULE_MESSAGE);
                         },
                       },
                       {
-                        tooltip: "Edit this rule ?",
-                        icon: "edit",
+                        tooltip: STRINGS.EDIT_RULE,
+                        icon: STRINGS.EDIT,
                         onClick: (evt, data) => {
                           this.setState({ editedData: data }, () => {
-                            this.setDataOnEdit(this.state.editedData)
-                            this.handleClick(1);
+                            this.setDataOnEdit(this.state.editedData);
+                            this.handleClick(0);
                           });
                         },
                       },
@@ -274,22 +291,17 @@ export default class App extends React.Component {
                       showEmptyDataSourceMessage: true,
                       pageSizeOptions: [5],
                       search: false,
-                      padding: "dense",
+                      padding: STRINGS.DENSE,
                     }}
                     columns={DATA_TABLE}
                     data={DATA_TABLE_VALUE}
-                    title="Rules"
+                    title={STRINGS.RULE}
                   />
                 </div>
               </div>
             </div>
-         
-         
           </div>
-        
-        
         </div>
-      
       </div>
     );
   }
