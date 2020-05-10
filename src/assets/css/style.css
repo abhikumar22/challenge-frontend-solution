@@ -10,7 +10,7 @@ html {
 
 .first {
   background-image: url("../images/wall1.jpg");
-  background-color: rgba(0, 0, 0, 0.50); 
+  /* background-color: rgba(0, 0, 0, 0.50);  */
   background-position: center;
   background-repeat: no-repeat; 
   background-size: cover; 
@@ -24,17 +24,23 @@ html {
 
 
 .div2{
-  background-image: url("../images/wall2.jpg"); 
-  background-color: rgba(0, 0, 0, 0.603); 
-  background-position: center;
+  /* background-image: url("../images/wall2.jpg");  */
+  background-color: #d6f3cf;
+  /* background-position: center;
   background-repeat: no-repeat; 
-  background-size: cover; 
+  background-size: cover;  */
   height: 100vh;
 }
 
 .formBorder{
   border-radius: 20px;
   background-color:#ccf0d5;
+  padding: 10px;
+  box-shadow: 5px 10px 18px #888888;
+}
+.formBorder2{
+  border-radius: 20px;
+  background-color:white;
   padding: 10px;
   box-shadow: 5px 10px 18px #888888;
 }

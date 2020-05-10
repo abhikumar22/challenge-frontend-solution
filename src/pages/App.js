@@ -260,7 +260,7 @@ export default class App extends React.Component {
           <div className="bbg">
             <div className="container h-100">
               <div className="row align-items-center h-100">
-                <div className="col-11 col-sm-11 col-md-11 col-lg-12 mx-auto py-5">
+                <div className="formBorder2 col-11 col-sm-11 col-md-11 col-lg-12 mx-auto py-5">
                   <MaterialTable
                     actions={[
                       {
