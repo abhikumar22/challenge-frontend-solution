@@ -1,4 +1,4 @@
-##This project is created primarily using Html, Css, Reactjs.
+## This project is created primarily using Html, Css, Reactjs.
 ### Click Here : -<code>https://managerules.netlify.app/</code> 
 
 # Manage Rules Editor
