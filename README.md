@@ -34,33 +34,43 @@
 ## Single Page Application <br>
 <img src="/readme_images/image_1.png">
 &nbsp;
+
 ## Single Page Application <br>
 <img src="/readme_images/image_2.png">
 &nbsp;
+
 ## Edit Rule <br>
 <img src="/readme_images/image_3.png">
 &nbsp;
+
 ## Edit Rule automatically populated values <br>
 <img src="/readme_images/image_5.png">
 &nbsp;
+
 ## Edit Rule API Call data <br>
 <img src="/readme_images/image_6.png">
 &nbsp;
+
 ## Delete Rule <br>
 <img src="/readme_images/image_4.png">
 &nbsp;
+
 ## Delete Rule API Call Data <br>
 <img src="/readme_images/image_7.png">
 &nbsp;
+
 ## Validation for none field selected <br>
 <img src="/readme_images/image_8.png">
 &nbsp;
+
 ## Post Call Data for adding a new Rule <br>
 <img src="/readme_images/image_9.png">
 &nbsp;
+
 ## Mobile Responsive 1 <br>
 <img src="/readme_images/image_10.png">
 &nbsp;
+
 ## Mobile Responsive 2 <br>
 <img src="/readme_images/image_11.png">
 &nbsp;
