@@ -16,6 +16,7 @@ import FieldComponent from "../component/FieldComponent";
 import MaterialTable from "material-table";
 import { getSelectedValue } from "../utils/HelperFunctions";
 
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -53,6 +54,7 @@ export default class App extends React.Component {
     this.setState({ selectedTenureOption });
   };
 
+
   handleClick(type) {
     if (type === 0) {
       if (this.landingDiv.current) {
@@ -79,7 +81,11 @@ export default class App extends React.Component {
   }
 
   submitRule() {
-    if (this.state.selectedMonthlyRentalAmountOption === null && this.state.selectedAgeOption === null && this.state.selectedZipcodeOption === null && this.state.selectedProductOption === null && this.state.selectedTenureOption === null) {
+    if (this.state.selectedMonthlyRentalAmountOption === null &&
+      this.state.selectedAgeOption === null &&
+      this.state.selectedZipcodeOption === null &&
+      this.state.selectedProductOption === null &&
+      this.state.selectedTenureOption === null) {
       alert("Please Select atleast one rule");
     } else {
       const body = {
@@ -89,7 +95,8 @@ export default class App extends React.Component {
         productName: this.state.selectedProductOption === null ? null : this.state.selectedProductOption.value,
         rentalTenure: this.state.selectedTenureOption === null ? null : this.state.selectedTenureOption.value,
       };
-      // console.log("body",body)
+      // here we have to do a fetch call( React API Call ) to Add a New rule into the system, 
+      // so the above body with the params is send as POST data
       alert("Body of POST call for adding a new Rule\n" + JSON.stringify(body));
       window.location.reload();
     }
@@ -103,11 +110,18 @@ export default class App extends React.Component {
       productName: this.state.selectedProductOption.value,
       rentalTenure: this.state.selectedTenureOption.value,
     };
-    // console.log("body",body)
+    // here we have to do a fetch call( React API Call ) to update the particular Rule, 
+    // so the above body with the params is send as POST data
     alert(
       "Body of POST call for Editing an existing rule\n" + JSON.stringify(body)
     );
     window.location.reload();
+  }
+
+  deleteRule(data) {
+    // here we have to do a fetch call( React API Call ) to delete a Rule, 
+    // so the body displayed with the params is send as POST data to update the records in the DB
+    alert(STRINGS.DELETE_RULE_MESSAGE + ".." + JSON.stringify(data));
   }
 
   setDataOnEdit(editedData) {
@@ -245,7 +259,7 @@ export default class App extends React.Component {
                         }
                       }}
                       className="w-100 btn mt-3"
-                      style={{backgroundColor:COLORS.lIME}}
+                      style={{ backgroundColor: COLORS.lIME }}
                     >
                       {this.state.editedData === null
                         ? STRINGS.SUBMIT
@@ -266,7 +280,7 @@ export default class App extends React.Component {
                 tooltip: STRINGS.DELETE_RULE,
                 icon: STRINGS.DELETE,
                 onClick: (evt, data) => {
-                  alert(STRINGS.DELETE_RULE_MESSAGE+".."+JSON.stringify(data));
+                  this.deleteRule(data)
                 },
               },
               {

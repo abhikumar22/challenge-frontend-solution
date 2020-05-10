@@ -30,6 +30,9 @@ const COLORS = {
   lIME:"#bdd9b6"
 }
 
+// -1 is taken to represent infinity i.e if x:[5001,-1] it means x is greater than 5000
+// These are static values and in Live environment, all these values will be fetched from Live server
+
 const MONTHLY_RENTAL_AMOUNT_OPTIONS = [
   { value: [0, 1000], label: '0 - $1000' },
   { value: [1001, 2000], label: '$1001 - $2000' },
@@ -75,22 +78,24 @@ const DATA_TABLE =
     { title: "Rental Tenure Upper", field: "rental_upr" }
   ]
 
+// Static Value in Data table
+// null means the value is taken into consideration while making a rule 
+// monthly_rent_low, monthly_rent_low -> Both are the lower and upper limit of MONTHLY RENTAL AMOUNT,
+// and vice versa for age and rental tenure also
+
+  
 const DATA_TABLE_VALUE = [
   { monthly_rent_low: '1001', monthly_rent_upr: "2000", age_low: "0", age_upr: "20", zip: "35801", product: "TV", rental_low: "3", rental_upr: "5" },
   { monthly_rent_low: null, monthly_rent_upr: null, age_low: "21", age_upr: "-1", zip: null, product: null, rental_low: null, rental_upr: null },
   { monthly_rent_low: '3001', monthly_rent_upr: "4000", age_low: "21", age_upr: "-1", zip: "94203", product: "Fridge", rental_low: "0", rental_upr: "3" },
   { monthly_rent_low: '1001', monthly_rent_upr: "2000", age_low: "21", age_upr: "-1", zip: "35801", product: "TV", rental_low: "3", rental_upr: "5" },
-  
   { monthly_rent_low: '0', monthly_rent_upr: "1000", age_low: null, age_upr: null, zip: null, product: "TV", rental_low: null, rental_upr: null },
-  
   { monthly_rent_low: '5001', monthly_rent_upr: "-1", age_low: "0", age_upr: "20", zip: "94203", product: "Fridge", rental_low: "6", rental_upr: "-1" },
   { monthly_rent_low: '5001', monthly_rent_upr: "-1", age_low: "0", age_upr: "20", zip: "90001", product: "TV", rental_low: "0", rental_upr: "2" },
   { monthly_rent_low: '1001', monthly_rent_upr: "2000", age_low: "21", age_upr: "-1", zip: "99501", product: "TV", rental_low: "6", rental_upr: "-1" },
   { monthly_rent_low: '0', monthly_rent_upr: "1000", age_low: "0", age_upr: "20", zip: "85001", product: "Fridge", rental_low: "3", rental_upr: "5" },
   { monthly_rent_low: null, monthly_rent_upr: null, age_low: null, age_upr: null, zip: null, product: null, rental_low: "3", rental_upr: "5" },
 ]
-
-
 
 
 export { FIELD_TYPE,DATA_TABLE_VALUE, DATA_TABLE, COLORS, STRINGS, MONTHLY_RENTAL_AMOUNT_OPTIONS, ZIPCODE_OPTIONS, CUSTOMER_AGE_OPTIONS, PRODUCT_NAME_OPTIONS, RENTAL_TENURE_OPTIONS };

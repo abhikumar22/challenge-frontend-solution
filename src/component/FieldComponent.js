@@ -1,8 +1,9 @@
 import React from "react";
 import Select from 'react-select';
 
+// Common Component for field Name & Dropdown in add rule box
 
- export default class FieldComponent extends React.Component {
+export default class FieldComponent extends React.Component {
     render() {
         return (
             <div className="py-1 row justify-content-center">
