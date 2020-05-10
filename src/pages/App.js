@@ -16,8 +16,6 @@ import FieldComponent from "../component/FieldComponent";
 import MaterialTable from "material-table";
 import { getSelectedValue } from "../utils/HelperFunctions";
 
-import { SemipolarLoading } from "react-loadingg";
-
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +27,6 @@ export default class App extends React.Component {
       selectedTenureOption: null,
       selectedProductOption: null,
       editedData: null,
-      loading:true,
     };
     this.landingDiv = React.createRef();
     this.homeDiv = React.createRef();
@@ -44,7 +41,6 @@ export default class App extends React.Component {
   // };
 
   componentDidMount() {
-    this.setState({loading:false})
     // window.addEventListener("scroll", this.listenScrollEvent);
   }
 
@@ -153,8 +149,7 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div>
-     {!this.state.loading? <div ref={this.landingDiv} className="first">
+      <div ref={this.landingDiv} className="first">
         <div className="bbg">
           <nav
             className="navbar navbar-expand-lg navbar-dark fixed-top py-2"
@@ -308,11 +303,6 @@ export default class App extends React.Component {
           </div>
         </div>
       </div>
-     :
-     <div>
-       <SemipolarLoading color={"yellow"} />
-     </div>
-     } </div>
     );
   }
 }
